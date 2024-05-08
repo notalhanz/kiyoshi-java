@@ -1,21 +1,16 @@
 package net.alhanz.kiyoshi;
 
-import discord4j.core.DiscordClient;
-import discord4j.core.GatewayDiscordClient;
-import discord4j.core.event.domain.lifecycle.ReadyEvent;
-import discord4j.core.object.entity.User;
-import reactor.core.publisher.Mono;
+import org.javacord.api.DiscordApi;
+import org.javacord.api.DiscordApiBuilder;
+import org.javacord.api.entity.intent.Intent;
 
 public class MyBot {
     public static void main(String[] args) {
-        DiscordClient client = DiscordClient.create(SecKey.tokenKey());
+        DiscordApi api = new DiscordApiBuilder()
+                .addIntents(Intent.GUILD_PRESENCES)
+                .setToken(SecKey.tokenKey())
+                .login()
+                .join();
 
-        Mono<Void> login = client.withGateway((GatewayDiscordClient gateway) ->
-                gateway.on(ReadyEvent.class, event ->
-                        Mono.fromRunnable(() -> {
-                            final User self = event.getSelf();
-                            System.out.printf("Logged in as %s#%s%n", self.getUsername(), self.getDiscriminator());
-                        })));
-        login.block();
     }
 }
