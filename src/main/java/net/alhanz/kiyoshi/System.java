@@ -4,10 +4,9 @@ import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
-import com.sun.management.OperatingSystemMXBean;
-
 
 import java.awt.*;
+import com.sun.management.OperatingSystemMXBean;
 import java.lang.management.ManagementFactory;
 import java.text.DecimalFormat;
 
@@ -61,12 +60,22 @@ public class System implements MessageCreateListener {
             double cpuLoad = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class).getCpuLoad();
             double cpuLoadPercent = cpuLoad * 100.0;
 
+            // Memory Info in Megabyte (MB)
+            double memFree = (double) Runtime.getRuntime().freeMemory() / 1024 / 1024;
+            double memTotal = (double) Runtime.getRuntime().totalMemory() / 1024 / 1024;
+
+            double memoryUsage = memTotal - memFree;
+            double memoryUsagePercent = (memoryUsage / memTotal) * 100.00;
+
+
             // Message Embed
             MessageAuthor author = event.getMessageAuthor();
             EmbedBuilder sysEmb = new EmbedBuilder()
                     .setTitle("System Information")
                     .setColor(Color.decode("0x69ff96"))
-                    .addField("Resources", "* CPU Load" + this.visualBar(cpuLoadPercent), true)
+                    .addField("**CPU Load**", this.visualBar(cpuLoadPercent))
+                    .addField("** Memory Usage**" + " [" + Math.round(memoryUsage) + "MB / "
+                            + Math.round(memTotal) + "MB]", this.visualBar(memoryUsagePercent))
                     .setFooter(author.getName(), author.getAvatar());
 
             event.getChannel().sendMessage(sysEmb);
