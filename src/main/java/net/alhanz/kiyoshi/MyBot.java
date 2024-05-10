@@ -18,6 +18,6 @@ public class MyBot {
                 .setToken(SecKey.tokenKey())
                 .login()
                 .join();
-        api.updateActivity(ActivityType.WATCHING, "Michael fucking a cunny");
+        api.updateActivity(ActivityType.LISTENING, "Debugging");
     }
 }
