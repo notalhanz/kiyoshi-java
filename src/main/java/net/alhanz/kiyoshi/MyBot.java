@@ -1,5 +1,6 @@
 package net.alhanz.kiyoshi;
 
+import net.alhanz.kiyoshi.Utils.System;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.activity.ActivityType;
@@ -15,7 +16,7 @@ public class MyBot {
         DiscordApi api = new DiscordApiBuilder()
                 .addIntents(Intent.MESSAGE_CONTENT)
                 .addListener(new System())
-                .setToken(SecKey.tokenKey())
+                .setToken(SecKey.discordAPIKey)
                 .login()
                 .join();
         api.updateActivity(ActivityType.LISTENING, "Debugging");
