@@ -1,5 +1,6 @@
-package net.alhanz.kiyoshi;
+package net.alhanz.kiyoshi.Utils;
 
+import net.alhanz.kiyoshi.MyBot;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.event.message.MessageCreateEvent;
@@ -71,12 +72,12 @@ public class System implements MessageCreateListener {
             // Message Embed
             MessageAuthor author = event.getMessageAuthor();
             EmbedBuilder sysEmb = new EmbedBuilder()
-                    .setTitle("System Information")
+                    .setAuthor("System Information", null, "https://cdn.discordapp.com/app-assets/435961293862600730/738729521888362506.png")
                     .setColor(Color.decode("0x69ff96"))
-                    .addField("**CPU Load**", this.visualBar(cpuLoadPercent))
-                    .addField("** Memory Usage**" + " [" + Math.round(memoryUsage) + "MB / "
+                    .addField("CPU Load", this.visualBar(cpuLoadPercent))
+                    .addField("Memory Usage" + " [" + Math.round(memoryUsage) + "MB / "
                             + Math.round(memTotal) + "MB]", this.visualBar(memoryUsagePercent))
-                    .setFooter(author.getName(), author.getAvatar());
+                    .setFooter(author.getName() + " | Kiyoshi v1.0-ALPHA", author.getAvatar());
 
             event.getChannel().sendMessage(sysEmb);
         }
