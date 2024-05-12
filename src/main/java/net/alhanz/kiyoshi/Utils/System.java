@@ -3,11 +3,14 @@ package net.alhanz.kiyoshi.Utils;
 import net.alhanz.kiyoshi.MyBot;
 import org.javacord.api.entity.message.MessageAuthor;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.event.interaction.SlashCommandCreateEvent;
 import org.javacord.api.event.message.MessageCreateEvent;
-import org.javacord.api.listener.message.MessageCreateListener;
+import org.javacord.api.listener.interaction.SlashCommandCreateListener;
 
 import java.awt.*;
 import com.sun.management.OperatingSystemMXBean;
+import org.javacord.api.listener.message.MessageCreateListener;
+
 import java.lang.management.ManagementFactory;
 import java.text.DecimalFormat;
 

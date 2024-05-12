@@ -16,12 +16,14 @@ public class osuAPI {
         osuToken.setClient_id(SecKey.osuClientID);
         osuToken.setClient_secret(SecKey.osuAPIKey);
 
-        // Post into API using Form Body Request
+        // Post into API using Form Body Request and Returning Json Format
         String authToken = getAuthToken();
 
-        // Converting Json from osuAPI to get OAuth Token
+        // Converting Json from osuAPI to get OAuth Token and Save Access Token
         Gson gson = new Gson();
         osuToken = gson.fromJson(authToken, Token.class);
+
+        System.out.println(osuToken.getAccess_token());
     }
 
     public static String getAuthToken() throws Exception {

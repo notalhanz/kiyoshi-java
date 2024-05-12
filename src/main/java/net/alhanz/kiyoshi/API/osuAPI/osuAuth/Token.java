@@ -4,9 +4,8 @@ public class Token {
 
     private String client_id;
     private String client_secret;
-    final public static String grant_type = "client_credentials";
-    final public static String scope = "public";
 
+    @SuppressWarnings("unused")
     private String access_token;
 
     public String getClient_id() {
@@ -27,10 +26,6 @@ public class Token {
 
     public String getAccess_token() {
         return access_token;
-    }
-
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
     }
 }
 
